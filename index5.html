@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Вход для педагогов</title>
+</head>
+<body>
+<h1>Вход</h1>
+ 	 
+ 	<p>Количество попыток: <span>3</span></p>
+ 	<input class="word">
+ 	<button class="start">Начать игру</button>
+ 	<br>
+ 	<input class="letter">
+ 	<button class="check">Проверить букву</button>
+
+<script type="text/javascript">
+	let secret="feromoklichcabinet"
+let letters=[]
+let popatka=3
+
+document.querySelector(".start").onclick=function(){
+	let out=""
+	for(let i=0;i<secret.length; i+=1){
+		out+="*"
+	}
+	popatka=3
+	document.querySelector("span").innerHTML=popatka
+	document.querySelector(".word").value=out
+	document.querySelector(".letter").disabled = false; 
+		 document.querySelector(".check").disabled = false;
+		 
+}
+document.querySelector(".check").onclick=function(){
+	let userLetter=document.querySelector(".letter").value//буква от пользователя
+	document.querySelector(".letter").value=""
+	letters.push(userLetter)
+	let out=""
+	for (let i = 0;i<secret.length; i++){
+		if (letters.indexOf(secret[i])!=-1) {//! - это неровно (/=)
+			out+=secret[i]
+		}
+		else{
+			out+="*"
+		}
+	}
+	if (secret.indexOf(userLetter) == -1){//если ввели неправильную букву, то /
+		popatka--//                                                          /
+		document.querySelector("span").innerHTML=popatka
+	}
+	if (popatka==0){
+		 document.querySelector(".letter").disabled = true; //выключим элемент с классом letter
+		 document.querySelector(".check").disabled = true; 
+	}
+	document.querySelector(".word").value=out
+}
+// /////////////test
+// let char=secret[0]//получаем букву из слова wordpressing
+// console.log(char)
+// let letter=secret.indexOf("i")//ищем символ в строке и выводим ее порядковый номер. Если не находим - получаем -1//
+// console.log(letter)
+// console.log(1)
+// console.log(2)
+// console.log(3)
+// console.log(4)
+// console.log(5)
+
+// console.log(secret.length)//длина строки(кол букв)secret
+// for(let i=0; i<secret.length; i+=1){//создаем цикл, который будет повторяться пока i будет меньше длины строки secret
+// 	console.log(secret[i])
+// }
+let russia=["Moscow",144,"YandexMarket","Ploshad Russia - 17.130.000"]
+russia.push("mo",23)
+console.log(russia)
+console.log(russia.indexOf("-1"))//ищет элемент в 39 строке
+</script>
+</body>
+</html>
